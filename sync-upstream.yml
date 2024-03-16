@@ -1,0 +1,25 @@
+name: Upstream Sync
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync_upstream:
+    name: Upstream Sync
+    runs-on: ubuntu-latest
+    if: github.repository != 'Dooy/chatgpt-web-midjourney-proxy'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Sync upstream changes
+        id: sync
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
+        with:
+          upstream_sync_repo: Dooy/chatgpt-web-midjourney-proxy
+          upstream_sync_branch: main
+          target_sync_branch: main
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }} # automatically generated, no need to set
+          test_mode: false
