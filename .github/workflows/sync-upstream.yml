@@ -11,12 +11,12 @@ jobs:
     if: github.repository != 'Dooy/chatgpt-web-midjourney-proxy'
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: main
       - name: Sync upstream changes
         id: sync
-        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1
         with:
           upstream_sync_repo: Dooy/chatgpt-web-midjourney-proxy
           upstream_sync_branch: main
